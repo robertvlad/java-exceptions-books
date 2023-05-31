@@ -6,80 +6,83 @@ import java.util.Scanner;
 
 public class Main {
 	
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("Numero di libri: ");
+		System.out.println("Quanti libri vuoi inserire?");
+		int nrLibri = Integer.parseInt(sc.nextLine());
 		
-		int numLibri = sc.nextInt();
+		Libro[] books = new Libro[nrLibri];
 		
-		sc.nextLine();
+		int it = 0;
 		
-		Libro[] libri = new Libro[numLibri];
-		
-		for ( int i = 0; i < numLibri; i++ ) {
-			
-			System.out.print("Titolo: ");			
-			String titolo = sc.nextLine();
-			
-			System.out.print("Numero di pagine: ");			
-			int numPagine = sc.nextInt();
-			
-			sc.nextLine();
-			
-			System.out.print("Autore: ");			
-			String autore = sc.nextLine();
-			
-			System.out.print("Editore: ");
-			String editore = sc.nextLine();
+		while (it < nrLibri) {
 			
 			try {
 				
-				Libro l = new Libro(titolo, numPagine, autore, editore);
-				libri[i] = l;
+				System.out.println("Definire titolo");
+				String titolo = sc.nextLine();
+				
+				System.out.println("Definire numero di pagine");
+				int nrPagine = Integer.parseInt(sc.nextLine());
+				
+				System.out.println("Definire autore");
+				String autore = sc.nextLine();
+				
+				System.out.println("Definire editore");
+				String editore = sc.nextLine();
+				
+				Libro l = new Libro(titolo, nrPagine, autore, editore);
+				
+				books[it] = l;
+				
+				it++;
+				
+				System.out.println("\n------------------------------------------------\n");
+				
 			} catch (Exception e) {
 				
-				i--;
-				
-				System.err.println("Valori errati, provare di nuovo!");
-				System.err.println(e.getMessage());
+				System.err.println("Errore nella creazione del libro: " + e.getMessage());
 			}
 		}
 		
+		FileWriter newFile = null;
+		
 		try {
 			
-			FileWriter myWriter = new FileWriter("C:\\Users\\vladr\\Desktop\\books.txt");
+			newFile = new FileWriter("C:\\Users\\vladr\\Desktop\\books.txt");
 			
-			for ( int i = 0; i < numLibri; i++ ) {
+			for (int i = 0; i < books.length; i++) {
 				
-				Libro l = libri[i];
-				
-				myWriter.write(l.toString() + "\n");
+				newFile.write(books[i] + "\n");
 			}
-
-			myWriter.close();
+			
+			newFile.close();
+			
 		} catch (Exception e) {
 			
-			System.err.println("Errore: " + e.getMessage());
+			System.err.println("Erroe: " + e.getMessage());
 		}
 		
 		try {
 			
-			File fileLibri = new File("C:\\Users\\vladr\\Desktop\\books.txt");
-			Scanner reader = new Scanner(fileLibri);
+			File myFile = new File("C:\\Users\\vladr\\Desktop\\books.txt");
+			
+			Scanner reader = new Scanner(myFile);
 			
 			while (reader.hasNextLine()) {
 				
-			   String line = reader.nextLine();
-			   System.out.println(line);
+				String data = reader.nextLine();
+				System.out.println(data);
 			}
-
+			
 			reader.close();
 		} catch (Exception e) {
 			
 			System.err.println("Errore: " + e.getMessage());
 		}
-	}
-
+		
+		sc.close();
+	}	
 }

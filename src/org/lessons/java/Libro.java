@@ -3,18 +3,17 @@ package org.lessons.java;
 public class Libro {
 	
 	private String titolo;
-	private int numPagine;
+	private int nrPagine;
 	private String autore;
 	private String editore;
 	
-	public Libro(String titolo, int numPagine, String autore, String editore) throws Exception {
+	public Libro(String titolo, int nrPagine, String autore, String editore) throws Exception {
 		
 		setTitolo(titolo);
-		setNumPagine(numPagine);
+		setNrPagine(nrPagine);
 		setAutore(autore);
 		setEditore(editore);
 	}
-	
 	
 	public String getTitolo() {
 		
@@ -25,25 +24,25 @@ public class Libro {
 		
 		if (titolo.isEmpty()) {
 			
-			throw new Exception("Titolo vuoto!");
+			throw new Exception("Il titolo non può essere vuoto!");
 		}
 		
 		this.titolo = titolo;
 	}
 	
-	public int getNumPagine() {
+	public int getNrPagine() {
 		
-		return numPagine;
+		return nrPagine;
 	}
 	
-	public void setNumPagine(int numPagine) throws Exception {
+	public void setNrPagine(int nrPagine) throws Exception {
 		
-		if (numPagine <= 0) {
+		if (nrPagine <= 0) {
 			
-			throw new Exception("Il numero di pagine deve essere maggiore di 0!");
+			throw new Exception("Il numero di pagine non può essere 0 o inferiore a 0!");
 		}
 		
-		this.numPagine = numPagine;
+		this.nrPagine = nrPagine;
 	}
 	
 	public String getAutore() {
@@ -55,9 +54,8 @@ public class Libro {
 		
 		if (autore.isEmpty()) {
 			
-			throw new Exception("Il campo dell'autore non può essere vuoto");
+			throw new Exception("Il titolo non può essere vuoto!");
 		}
-		
 		this.autore = autore;
 	}
 	
@@ -75,10 +73,6 @@ public class Libro {
 	@Override
 	public String toString() {
 		
-		return "Nome del Libro: " + getTitolo() + " \n"
-				+ "Nome dell'autore: " + getAutore()
-			+ "\nNumero pagine: " + getNumPagine()
-			+ "\nEditore: " + getEditore();
+		return "| Titolo: " + getTitolo() + " | Numero di pagine: " + getNrPagine() + " | Autore: " + getAutore() + " | Editore: " + getEditore() + " |";
 	}
-
 }
