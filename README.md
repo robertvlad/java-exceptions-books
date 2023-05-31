@@ -1,6 +1,7 @@
 # java-exceptions-books
 
 ## Todo
+
 Vogliamo gestire il *catalogo di libri* di una *biblioteca*.
 
 Un `Libro` è composto da :
